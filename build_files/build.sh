@@ -5,7 +5,7 @@ set -ouex pipefail
 cp -avf "/ctx/system_files"/. /
 
 dnf5 -y remove plasma-workspace plasma-* kde-*
-dnf5 copr enable sneexy/zen-browser
+dnf5 -y copr enable sneexy/zen-browser
 dnf5 config-manager setopt terra.enabled=1
 
 dnf5 -y install 				    \
