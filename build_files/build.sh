@@ -10,11 +10,9 @@ dnf5 -y copr enable zhangyi6324/noctalia-shell
 
 dnf5 -y install 				    \
 	niri						          \
-	ghostty						        \
 	gnome-keyring				      \
 	dolphin						        \
 	xwayland-satellite		    \
-	noctalia-shell				    \
 	ark							          \
 	mako						          \
 	mpv							          \
@@ -38,6 +36,14 @@ dnf5 -y install 				    \
 
 if ! dnf5 -y install zen-browser; then
 	echo "Warning: zen-browser unavailable, continuing without it."
+fi
+
+if ! dnf5 -y install ghostty; then
+	echo "Warning: ghostty unavailable, continuing without it."
+fi
+
+if ! dnf5 -y install noctalia-shell; then
+	echo "Warning: noctalia-shell unavailable due to repo/dependency state, continuing without it."
 fi
 
 
