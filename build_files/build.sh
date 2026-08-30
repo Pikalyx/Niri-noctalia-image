@@ -5,7 +5,6 @@ set -ouex pipefail
 cp -avf "/ctx/system_files"/. /
 
 dnf5 -y remove plasma-workspace plasma-* kde-*
-dnf5 -y copr enable sneexy/zen-browser
 dnf5 -y copr enable zhangyi6324/noctalia-shell
 
 dnf5 -y install 				    \
@@ -34,9 +33,6 @@ dnf5 -y install 				    \
 	ddcutil						        \
 	polkit-kde
 
-if ! dnf5 -y install zen-browser; then
-	echo "Warning: zen-browser unavailable, continuing without it."
-fi
 
 if ! dnf5 -y install ghostty; then
 	echo "Warning: ghostty unavailable, continuing without it."
