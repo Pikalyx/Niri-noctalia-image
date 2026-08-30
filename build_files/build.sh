@@ -8,6 +8,7 @@ dnf5 -y remove plasma-workspace plasma-* kde-*
 
 dnf5 config-manager setopt terra.enabled=1
 dnf5 config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+dnf5 copr enable lionheartp/Hyprland
 
 dnf5 -y install 				\
 	niri						\
@@ -15,7 +16,7 @@ dnf5 -y install 				\
 	gnome-keyring				\
 	dolphin						\
 	xwayland-satellite			\
-	noctalia-shell				\
+	noctalia-git				\
 	ark							\
 	mako						\
 	mpv							\
