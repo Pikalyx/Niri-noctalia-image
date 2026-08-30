@@ -15,7 +15,7 @@ dnf5 -y install 				\
 	gnome-keyring				\
 	dolphin						\
 	xwayland-satellite			\
-	noctalia				\
+	danklinux				\
 	ark							\
 	mako						\
 	mpv							\
