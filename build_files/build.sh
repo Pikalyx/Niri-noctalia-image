@@ -6,6 +6,9 @@ cp -avf "/ctx/system_files"/. /
 
 dnf5 -y remove plasma-workspace plasma-* kde-*
 
+dnf5 config-manager setopt terra.enabled=1
+dnf5 config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+
 dnf5 -y install 				\
 	niri						\
 	ghostty						\
@@ -13,7 +16,6 @@ dnf5 -y install 				\
 	dolphin						\
 	xwayland-satellite			\
 	noctalia-shell				\
-	librewolf					\
 	ark							\
 	mako						\
 	mpv							\
