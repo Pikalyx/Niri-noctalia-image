@@ -124,10 +124,6 @@ dnf5 -y install \
      sassc \
      glib2-devel
 
-# mullvad vpn
-dnf5 -y config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo
-dnf5 -y install mullvad-vpn
-
 # zirconium stuff i yanked
 sed -i '/gnome_keyring.so/ s/-auth/auth/ ; /gnome_keyring.so/ s/-session/session/' /etc/pam.d/greetd
 cat /etc/pam.d/greetd
