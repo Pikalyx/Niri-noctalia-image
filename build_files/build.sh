@@ -16,16 +16,16 @@ dnf5 -y copr disable errornointernet/quickshell
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:errornointernet:quickshell install quickshell-git
 
 dnf5 -y copr enable purian23/material-symbols-fonts
-dnf5 -y copr disable purian23/material-symbols-fonts
+# dnf5 -y copr disable purian23/material-symbols-fonts
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:purian23:material-symbols-fonts install material-symbols-fonts
 
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr disable avengemedia/danklinux
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:avengemedia:danklinux install \
-     dgop \
-     brightnessctl \
-     cava \
-     accountsservice
+    dgop \
+    brightnessctl \
+    cava \
+    accountsservice
 
 dnf -y copr enable avengemedia/dms-git
 dnf -y copr disable avengemedia/dms-git
@@ -56,60 +56,60 @@ git clone https://github.com/AvengeMedia/DankMaterialShell.git /etc/xdg/quickshe
 
 # main packages ig lol
 dnf5 -y remove \
-     alacritty \
-     hhd
+    alacritty \
+    hhd
 
 dnf5 -y install \
-     hyfetch \
-     greetd \
-     greetd-selinux \
-     steam-devices \
-     udiskie \
-     wlsunset \
-     xdg-desktop-portal-wlr \
-     wl-clipboard \
-     swaylock \
-     swayidle \
-     tuigreet \
-     adw-gtk3-theme \
-     python3-vdirsyncer \
-     khal \
-     python3-aiohttp-oauthlib \
-     kde-connect \
-     kde-connect-libs \
-     kde-connect-nautilus \
-     kdeconnectd \
-     uxplay \
-     input-remapper \
-     v4l-utils \
-     openhmd \
-     waydroid \
-     libinput-utils \
-     ladspa-caps-plugins \
-     ladspa-noise-suppression-for-voice \
-     pipewire-module-filter-chain-sofa \
-     duperemove \
-     compsize \
-     cage \
-     snapper \
-     btrfs-assistant \
-     rar \
-     lzip \
-     kmenuedit \
-     dolphin \
-     glycin-thumbnailer \
-     webp-pixbuf-loader \
-     google-roboto-fonts \
-     gnome-keyring \
-     gnome-keyring-pam \
-     default-fonts
+    hyfetch \
+    greetd \
+    greetd-selinux \
+    steam-devices \
+    udiskie \
+    wlsunset \
+    xdg-desktop-portal-wlr \
+    wl-clipboard \
+    swaylock \
+    swayidle \
+    tuigreet \
+    adw-gtk3-theme \
+    python3-vdirsyncer \
+    khal \
+    python3-aiohttp-oauthlib \
+    kde-connect \
+    kde-connect-libs \
+    kde-connect-nautilus \
+    kdeconnectd \
+    uxplay \
+    input-remapper \
+    v4l-utils \
+    openhmd \
+    waydroid \
+    libinput-utils \
+    ladspa-caps-plugins \
+    ladspa-noise-suppression-for-voice \
+    pipewire-module-filter-chain-sofa \
+    duperemove \
+    compsize \
+    cage \
+    snapper \
+    btrfs-assistant \
+    rar \
+    lzip \
+    kmenuedit \
+    dolphin \
+    glycin-thumbnailer \
+    webp-pixbuf-loader \
+    google-roboto-fonts \
+    gnome-keyring \
+    gnome-keyring-pam \
+    default-fonts
 
 # amd stuff
 dnf5 -y install \
-     rocm-hip \
-     rocm-opencl \
-     rocm-clinfo\
-     rocm-smi
+    rocm-hip \
+    rocm-opencl \
+    rocm-clinfo\
+    rocm-smi
 
 # qt stuff
 dnf5 -y install --setopt=install_weak_deps=False \
@@ -121,8 +121,8 @@ dnf5 -y install --setopt=install_weak_deps=False \
 
 # vinceliuice mactahoe-gtk-theme
 dnf5 -y install \
-     sassc \
-     glib2-devel
+    sassc \
+    glib2-devel
 
 # zirconium stuff i yanked
 sed -i '/gnome_keyring.so/ s/-auth/auth/ ; /gnome_keyring.so/ s/-session/session/' /etc/pam.d/greetd
