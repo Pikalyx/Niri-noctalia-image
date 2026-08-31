@@ -1,0 +1,3 @@
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=niri
+export DESKTOP_SESSION=niri

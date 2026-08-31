@@ -45,6 +45,12 @@ layout {
         inactive-color "#3b4252"
     }
 
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
 }
 
 binds {
@@ -85,7 +91,12 @@ binds {
     XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
 }
 
-spawn-at-startup "dms" "run"
+spawn-at-startup "dms"
 spawn-at-startup "dsearch"
 spawn-at-startup "nm-applet"
 spawn-at-startup "kdeconnect-indicator"
+
+output "*" {
+    mode "preferred"
+    scale 1
+}
