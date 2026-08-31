@@ -27,4 +27,11 @@ fi
 ln -s /usr/lib/systemd/system/gdm.service /etc/systemd/system/display-manager.service
 
 # Start the companion user services for the desktop session
-systemctl --global add-wants dms dsearch.service
+# Start companion user services only if their units really exist
+if systemctl --global list-unit-files dms.service >/dev/null 2>&1; then
+    systemctl --global add-wants graphical-session.target dms.service || true
+fi
+
+if systemctl --global list-unit-files dsearch.service >/dev/null 2>&1; then
+    systemctl --global add-wants graphical-session.target dsearch.service || true
+fi
