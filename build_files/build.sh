@@ -86,7 +86,6 @@ dnf5 -y install \
     waydroid \
     libinput-utils \
     ladspa-caps-plugins \
-    ladspa-noise-suppression-for-voice \
     pipewire-module-filter-chain-sofa \
     duperemove \
     compsize \
