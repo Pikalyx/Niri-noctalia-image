@@ -15,9 +15,9 @@ dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y copr disable errornointernet/quickshell
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:errornointernet:quickshell install quickshell-git
 
-dnf5 -y copr enable purian23/material-symbols-fonts
+# dnf5 -y copr enable purian23/material-symbols-fonts
 # dnf5 -y copr disable purian23/material-symbols-fonts
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:purian23:material-symbols-fonts install material-symbols-fonts
+# dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:purian23:material-symbols-fonts install material-symbols-fonts
 
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr disable avengemedia/danklinux
