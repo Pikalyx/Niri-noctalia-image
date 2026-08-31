@@ -1,0 +1,102 @@
+input {
+    keyboard {
+        xkb {
+            options "ctrl:nocaps,altwin:swap_alt_win"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        accel-speed 0.35
+        scroll-factor 1.0
+    }
+
+    mouse {
+        accel-speed 0.2
+    }
+}
+
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    XCURSOR_SIZE "24"
+}
+
+layout {
+    gaps 10
+    center-focused-column "on-overflow"
+    default-column-width { proportion 0.55; }
+
+    preset-column-widths {
+        proportion 0.45
+        proportion 0.6
+        proportion 0.8
+    }
+
+    border {
+        width 2
+        active-color "#8ab4ff"
+        inactive-color "#3b4252"
+    }
+
+    focus-ring {
+        width 2
+        active-color "#c0caf5"
+        inactive-color "#3b4252"
+    }
+
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
+}
+
+binds {
+    Mod+Return { spawn "ghostty"; }
+    Mod+Shift+Return { spawn "foot"; }
+    Mod+Shift+F { spawn "firefox"; }
+    Mod+Space { spawn "wofi" "--show" "drun"; }
+    Mod+Shift+Q { quit; }
+    Mod+Q { close-window; }
+    Mod+M { fullscreen; }
+    Mod+F { maximize-column; }
+
+    Mod+H { focus-column-left; }
+    Mod+J { focus-column-down; }
+    Mod+K { focus-column-up; }
+    Mod+L { focus-column-right; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+J { move-column-down; }
+    Mod+Shift+K { move-column-up; }
+    Mod+Shift+L { move-column-right; }
+
+    Mod+Comma { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
+
+    Mod+1 { focus-column 1; }
+    Mod+2 { focus-column 2; }
+    Mod+3 { focus-column 3; }
+
+    Mod+P { spawn "grim" "-g" "$(slurp)" "- | wl-copy"; }
+    Mod+Shift+P { spawn "grim" "-g" "$(slurp)" "/tmp/screenshot.png"; }
+    Mod+Tab { toggle-overview; }
+
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "1"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+}
+
+spawn-at-startup "dms"
+spawn-at-startup "dsearch"
+spawn-at-startup "nm-applet"
+spawn-at-startup "kdeconnect-indicator"
+
+output "*" {
+    mode "preferred"
+    scale 1
+}
