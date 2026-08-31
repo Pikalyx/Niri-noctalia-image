@@ -20,22 +20,11 @@ dnf5 -y install dsearch matugen dgop ghostty
 dnf5 -y copr disable avengemedia/danklinux
 
 # Ensure the graphical login manager is enabled so the user reaches a desktop
-systemctl enable gdm
+if [ -L /etc/systemd/system/display-manager.service ] && \
+   [ "$(readlink /etc/systemd/system/display-manager.service)" != "/usr/lib/systemd/system/gdm.service" ]; then
+  rm -f /etc/systemd/system/display-manager.service
+fi
+ln -s /usr/lib/systemd/system/gdm.service /etc/systemd/system/display-manager.service
 
 # Start the compositor/session pieces for the user session
 systemctl --global add-wants niri.service dms dsearch.service
-
-# Make sure the session is usable from the display manager
-mkdir -p /etc/dconf/profile
-cat > /etc/dconf/profile/user <<'EOF'
-user-db:user
-system-db:local
-EOF
-
-mkdir -p /etc/dconf/db/local.d
-cat > /etc/dconf/db/local.d/00-defaults <<'EOF'
-[org/gnome/desktop/interface]
-color-scheme='prefer-dark'
-EOF
-
-dconf update
