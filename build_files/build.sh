@@ -26,5 +26,5 @@ if [ -L /etc/systemd/system/display-manager.service ] && \
 fi
 ln -s /usr/lib/systemd/system/gdm.service /etc/systemd/system/display-manager.service
 
-# Start the compositor/session pieces for the user session
-systemctl --global add-wants niri.service dms dsearch.service
+# Start the companion user services for the desktop session
+systemctl --global add-wants dms dsearch.service
