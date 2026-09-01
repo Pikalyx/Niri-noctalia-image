@@ -37,6 +37,13 @@ command = "dms-greeter --command niri"
 user = "greeter"
 EOF
 
+# greetd requires a list of valid session commands for the login flow. Without
+# an entry for Niri, the greeter can authenticate the user but then immediately
+# exit because no valid session is available.
+cat > /etc/greetd/environments <<'EOF'
+niri
+EOF
+
 # The base image already enables GDM as the display-manager alias. Greetd uses
 # the same alias, so disable GDM first and then enable greetd to avoid the
 # systemd conflict that appears as "File '/etc/systemd/system/display-manager.service' already exists".
