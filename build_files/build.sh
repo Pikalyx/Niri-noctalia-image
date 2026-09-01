@@ -48,6 +48,7 @@ EOF
 # logged-in display manager session. This wrapper keeps the greeter working while
 # ensuring the main compositor imports the user session environment instead of
 # exiting to a blank screen.
+mkdir -p /usr/local/bin
 cat > /usr/local/bin/niri <<'EOF'
 #!/bin/bash
 exec /usr/bin/niri --session "$@"
