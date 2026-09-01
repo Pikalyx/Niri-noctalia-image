@@ -13,6 +13,7 @@ set -ouex pipefail
 # dnf5 install -y tmux
 dnf5 install -y --setopt=install_weak_deps=False niri
 dnf5 install -y khal
+dnf5 install -y ghostty
 
 # Use a COPR Example:
 #
