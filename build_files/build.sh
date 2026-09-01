@@ -40,22 +40,29 @@ EOF
 # greetd requires a list of valid session commands for the login flow. Without
 # an entry for Niri, the greeter can authenticate the user but then immediately
 # exit because no valid session is available.
-cat > /etc/greetd/environments <<'EOF'
-niri
-EOF
+NIRI_SESSION_PATH="/usr/local/bin/niri"
+if [ -e /usr/local ] && [ ! -d /usr/local ]; then
+    NIRI_SESSION_PATH="/usr/bin/niri"
+else
+    mkdir -p /usr/local/bin
+fi
 
 # Niri must start in session mode when it is the actual compositor instance for a
 # logged-in display manager session. This wrapper keeps the greeter working while
 # ensuring the main compositor imports the user session environment instead of
 # exiting to a blank screen.
-if [ ! -d /usr/local/bin ]; then
-    mkdir -p /usr/local/bin
-fi
-cat > /usr/local/bin/niri <<'EOF'
+mkdir -p "$(dirname "$NIRI_SESSION_PATH")"
+cat > "$NIRI_SESSION_PATH" <<'EOF'
 #!/bin/bash
 exec /usr/bin/niri --session "$@"
 EOF
-chmod 755 /usr/local/bin/niri
+chmod 755 "$NIRI_SESSION_PATH"
+
+# Keep the command name as `niri` so greetd can resolve it from PATH while still
+# using a valid wrapper location when /usr/local is not a real directory.
+cat > /etc/greetd/environments <<'EOF'
+niri
+EOF
 
 # The base image already enables GDM as the display-manager alias. Greetd uses
 # the same alias, so disable GDM first and then enable greetd to avoid the
