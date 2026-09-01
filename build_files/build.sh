@@ -14,9 +14,9 @@ set -ouex pipefail
 dnf5 install -y --setopt=install_weak_deps=False niri
 dnf5 install -y khal
 
-dnf5 copr enable scottames/ghostty
+dnf5 copr -y enable scottames/ghostty
 dnf5 install -y ghostty
-dnf5 copr disable scottames/ghostty
+dnf5 copr -y disable scottames/ghostty
 
 # Use a COPR Example:
 #
