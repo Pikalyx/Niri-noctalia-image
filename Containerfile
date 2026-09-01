@@ -1,6 +1,5 @@
 FROM scratch AS ctx
 COPY build_files /
-COPY system_files /files
 
 FROM ghcr.io/ublue-os/bazzite:stable
 
