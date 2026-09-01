@@ -37,6 +37,10 @@ command = "dms-greeter --command niri"
 user = "greeter"
 EOF
 
+# The base image already enables GDM as the display-manager alias. Greetd uses
+# the same alias, so disable GDM first and then enable greetd to avoid the
+# systemd conflict that appears as "File '/etc/systemd/system/display-manager.service' already exists".
+systemctl disable gdm.service || true
 systemctl enable greetd.service
 
 #### Example for enabling a System Unit File
