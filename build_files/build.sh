@@ -22,10 +22,23 @@ dnf5 install -y khal
 # dnf5 -y copr disable ublue-os/staging
 
 dnf5 -y copr enable avengemedia/dms
-dnf5 -y install --setopt=install_weak_deps=True dms dms-greeter
+dnf5 -y install --setopt=install_weak_deps=True greetd dms dms-greeter
 dnf5 -y copr disable avengemedia/dms
+
+# DMS needs greetd to be enabled and pointed at the DMS greeter. Without this,
+# the system starts on a VT with no login manager and you end up at a black screen.
+mkdir -p /etc/greetd
+cat > /etc/greetd/config.toml <<'EOF'
+[terminal]
+vt = 1
+
+[default_session]
+command = "dms-greeter --command niri"
+user = "greeter"
+EOF
+
+systemctl enable greetd.service
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket dms
-systemctl --user add-wants niri.service
+systemctl enable podman.socket
