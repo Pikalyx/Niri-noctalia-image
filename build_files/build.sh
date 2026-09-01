@@ -44,6 +44,16 @@ cat > /etc/greetd/environments <<'EOF'
 niri
 EOF
 
+# Niri must start in session mode when it is the actual compositor instance for a
+# logged-in display manager session. This wrapper keeps the greeter working while
+# ensuring the main compositor imports the user session environment instead of
+# exiting to a blank screen.
+cat > /usr/local/bin/niri <<'EOF'
+#!/bin/bash
+exec /usr/bin/niri --session "$@"
+EOF
+chmod 755 /usr/local/bin/niri
+
 # The base image already enables GDM as the display-manager alias. Greetd uses
 # the same alias, so disable GDM first and then enable greetd to avoid the
 # systemd conflict that appears as "File '/etc/systemd/system/display-manager.service' already exists".
