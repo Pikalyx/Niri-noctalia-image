@@ -40,11 +40,10 @@ EOF
 # greetd requires a list of valid session commands for the login flow. Without
 # an entry for Niri, the greeter can authenticate the user but then immediately
 # exit because no valid session is available.
-NIRI_SESSION_PATH="/usr/local/bin/niri"
-if [ -e /usr/local ] && [ ! -d /usr/local ]; then
-    NIRI_SESSION_PATH="/usr/bin/niri"
-else
+NIRI_SESSION_PATH="/usr/bin/niri"
+if [ -d /usr/local ]; then
     mkdir -p /usr/local/bin
+    NIRI_SESSION_PATH="/usr/local/bin/niri"
 fi
 
 # Niri must start in session mode when it is the actual compositor instance for a
