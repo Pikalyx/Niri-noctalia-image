@@ -14,6 +14,10 @@ set -ouex pipefail
 dnf5 install -y --setopt=install_weak_deps=False niri
 dnf5 install -y khal
 
+dnf5 copr -y enable scottames/ghostty
+dnf5 install -y ghostty
+dnf5 copr -y disable scottames/ghostty
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -40,6 +44,31 @@ EOF
 # greetd requires a list of valid session commands for the login flow. Without
 # an entry for Niri, the greeter can authenticate the user but then immediately
 # exit because no valid session is available.
+NIRI_SESSION_PATH="/usr/bin/niri"
+if [ -d /usr/local ]; then
+    mkdir -p /usr/local/bin
+    NIRI_SESSION_PATH="/usr/local/bin/niri"
+fi
+
+
+
+systemctl enable podman.socket
+
+systemctl --global enable dms
+
+# Niri must start in session mode when it is the actual compositor instance for a
+# logged-in display manager session. This wrapper keeps the greeter working while
+# ensuring the main compositor imports the user session environment instead of
+# exiting to a blank screen.
+mkdir -p "$(dirname "$NIRI_SESSION_PATH")"
+cat > "$NIRI_SESSION_PATH" <<'EOF'
+#!/bin/bash
+exec /usr/bin/niri --session "$@"
+EOF
+chmod 755 "$NIRI_SESSION_PATH"
+
+# Keep the command name as `niri` so greetd can resolve it from PATH while still
+# using a valid wrapper location when /usr/local is not a real directory.
 cat > /etc/greetd/environments <<'EOF'
 niri
 EOF
@@ -47,9 +76,8 @@ EOF
 # The base image already enables GDM as the display-manager alias. Greetd uses
 # the same alias, so disable GDM first and then enable greetd to avoid the
 # systemd conflict that appears as "File '/etc/systemd/system/display-manager.service' already exists".
-systemctl disable gdm.service || true
-systemctl enable greetd.service
+systemctl disable gdm
+systemctl enable greetd
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
