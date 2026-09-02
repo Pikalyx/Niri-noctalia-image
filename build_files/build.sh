@@ -37,7 +37,7 @@ cat > /etc/greetd/config.toml <<'EOF'
 vt = 1
 
 [default_session]
-command = "dms-greeter --command niri"
+command = "/usr/bin/dms-greeter --command niri"
 user = "greeter"
 EOF
 
