@@ -50,6 +50,12 @@ if [ -d /usr/local ]; then
     NIRI_SESSION_PATH="/usr/local/bin/niri"
 fi
 
+
+
+systemctl enable podman.socket
+
+systemctl --global enable dms
+
 # Niri must start in session mode when it is the actual compositor instance for a
 # logged-in display manager session. This wrapper keeps the greeter working while
 # ensuring the main compositor imports the user session environment instead of
@@ -70,9 +76,8 @@ EOF
 # The base image already enables GDM as the display-manager alias. Greetd uses
 # the same alias, so disable GDM first and then enable greetd to avoid the
 # systemd conflict that appears as "File '/etc/systemd/system/display-manager.service' already exists".
-systemctl disable gdm.service || true
-systemctl enable greetd.service
+systemctl disable gdm
+systemctl enable greetd
 
 #### Example for enabling a System Unit File
 
-systemctl enable podman.socket
